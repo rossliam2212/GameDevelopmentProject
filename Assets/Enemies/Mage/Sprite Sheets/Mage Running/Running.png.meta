@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 11fb6879d605b614e85f6c0110bbc120
+guid: e482a7e8f83d9c84b999a672ff498650
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8536292863944459660
-    second: Normal Attack_19
+      213: -3643998761827717319
+    second: Running_0
   - first:
-      213: -5136397121279187402
-    second: Normal Attack_20
+      213: -4707866458138886681
+    second: Running_1
   - first:
-      213: 5968188892617596691
-    second: Normal Attack_21
+      213: -7457498982976366407
+    second: Running_2
   - first:
-      213: 9046477068557567154
-    second: Normal Attack_22
+      213: -5594891616951461250
+    second: Running_3
   - first:
-      213: -1607203912630763219
-    second: Normal Attack_23
+      213: 2398275797733112376
+    second: Running_4
   - first:
-      213: 6348786638735674086
-    second: Normal Attack_24
+      213: -6865345740338609477
+    second: Running_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,13 +121,34 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Normal Attack_19
+      name: Running_0
       rect:
         serializedVersion: 2
-        x: 24
-        y: 11
+        x: 0
+        y: 0
+        width: 23
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93fab4fce6aed6dc0800000000000000
+      internalID: -3643998761827717319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Running_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
         width: 25
-        height: 42
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -135,20 +156,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c858c1ee121077670800000000000000
-      internalID: 8536292863944459660
+      spriteID: 7edb7a0566c4aaeb0800000000000000
+      internalID: -4707866458138886681
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Normal Attack_20
+      name: Running_2
       rect:
         serializedVersion: 2
-        x: 88
-        y: 11
+        x: 97
+        y: 0
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b85bdebf24a18890800000000000000
+      internalID: -7457498982976366407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Running_3
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 0
         width: 25
-        height: 47
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,20 +198,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 636a0d0380ad7b8b0800000000000000
-      internalID: -5136397121279187402
+      spriteID: e7a1cc6a7b3fa52b0800000000000000
+      internalID: -5594891616951461250
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Normal Attack_21
+      name: Running_4
       rect:
         serializedVersion: 2
-        x: 152
-        y: 11
-        width: 33
-        height: 42
+        x: 197
+        y: 0
+        width: 26
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,20 +219,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31f57e05d2443d250800000000000000
-      internalID: 5968188892617596691
+      spriteID: 83a7c45a123684120800000000000000
+      internalID: 2398275797733112376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Normal Attack_22
+      name: Running_5
       rect:
         serializedVersion: 2
-        x: 216
-        y: 11
-        width: 28
-        height: 42
+        x: 247
+        y: 0
+        width: 26
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,50 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b4471ca6fa8b8d70800000000000000
-      internalID: 9046477068557567154
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Normal Attack_23
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 11
-        width: 25
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d21860a8e8012b9e0800000000000000
-      internalID: -1607203912630763219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Normal Attack_24
-      rect:
-        serializedVersion: 2
-        x: 344
-        y: 11
-        width: 25
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ea06948fcb6b1850800000000000000
-      internalID: 6348786638735674086
+      spriteID: bb240ee5c6469b0a0800000000000000
+      internalID: -6865345740338609477
       vertices: []
       indices: 
       edges: []

@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: 11fb6879d605b614e85f6c0110bbc120
+guid: 998fc1d3e05d8a248aff44eed70731eb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8536292863944459660
-    second: Normal Attack_19
+      213: 4723107735738678597
+    second: Idle_0
   - first:
-      213: -5136397121279187402
-    second: Normal Attack_20
+      213: -7385789195546760866
+    second: Idle_1
   - first:
-      213: 5968188892617596691
-    second: Normal Attack_21
+      213: 3234629978573100161
+    second: Idle_2
   - first:
-      213: 9046477068557567154
-    second: Normal Attack_22
-  - first:
-      213: -1607203912630763219
-    second: Normal Attack_23
-  - first:
-      213: 6348786638735674086
-    second: Normal Attack_24
+      213: 6373048116405451881
+    second: Idle_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Normal Attack_19
+      name: Idle_0
       rect:
         serializedVersion: 2
-        x: 24
-        y: 11
-        width: 25
-        height: 42
+        x: 0
+        y: 0
+        width: 17
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -135,20 +129,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c858c1ee121077670800000000000000
-      internalID: 8536292863944459660
+      spriteID: 54d7a982679db8140800000000000000
+      internalID: 4723107735738678597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Normal Attack_20
+      name: Idle_1
       rect:
         serializedVersion: 2
-        x: 88
-        y: 11
-        width: 25
-        height: 47
+        x: 50
+        y: 0
+        width: 17
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 636a0d0380ad7b8b0800000000000000
-      internalID: -5136397121279187402
+      spriteID: e596485bbd7608990800000000000000
+      internalID: -7385789195546760866
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Normal Attack_21
+      name: Idle_2
       rect:
         serializedVersion: 2
-        x: 152
-        y: 11
-        width: 33
-        height: 42
+        x: 100
+        y: 0
+        width: 17
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31f57e05d2443d250800000000000000
-      internalID: 5968188892617596691
+      spriteID: 184dda4e3d6b3ec20800000000000000
+      internalID: 3234629978573100161
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Normal Attack_22
+      name: Idle_3
       rect:
         serializedVersion: 2
-        x: 216
-        y: 11
-        width: 28
-        height: 42
+        x: 150
+        y: 0
+        width: 17
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,50 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b4471ca6fa8b8d70800000000000000
-      internalID: 9046477068557567154
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Normal Attack_23
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 11
-        width: 25
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d21860a8e8012b9e0800000000000000
-      internalID: -1607203912630763219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Normal Attack_24
-      rect:
-        serializedVersion: 2
-        x: 344
-        y: 11
-        width: 25
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ea06948fcb6b1850800000000000000
-      internalID: 6348786638735674086
+      spriteID: 96cb1dafe7d917850800000000000000
+      internalID: 6373048116405451881
       vertices: []
       indices: 
       edges: []
