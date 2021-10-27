@@ -10,3 +10,8 @@
 - Created Start Menu
 - Added Player Shooting Ability
 - Added Two Enemy Sprites & Animations
+
+### Third Commit
+- Added Collision Detection for Players Bullets
+- Added Score & Lives Contrller
+- Added UI for Score & Lives
