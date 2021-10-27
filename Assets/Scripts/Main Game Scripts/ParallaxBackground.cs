@@ -6,7 +6,7 @@ public class ParallaxBackground : MonoBehaviour {
 
     private float length;
     private float startPosition;
-    public GameObject camera;
+    public new GameObject camera;
     [SerializeField] private float parallaxEffect;
 
     private void Start() {

@@ -10,7 +10,7 @@ public class ArcherMovement : MonoBehaviour {
 
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private bool isJumping;
-    [SerializeField] private bool isGrounded = true;
+    //[SerializeField] private bool isGrounded = true;
     [SerializeField] private bool isShooting;
 
     [SerializeField] private float runSpeed = 10f;
