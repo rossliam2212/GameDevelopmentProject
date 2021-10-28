@@ -15,3 +15,7 @@
 - Added Collision Detection for Players Bullets
 - Added Score & Lives Contrller
 - Added UI for Score & Lives
+
+### Fourth Commit
+- Added Enemy Functionality - Following Player, Attacking Player, Moving between two points
+- Added Game Over UI
