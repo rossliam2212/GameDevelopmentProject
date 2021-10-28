@@ -1,5 +1,6 @@
 # GameDevelopmentProject
-## Year 2 Semester 1 - Game Development Project
+# Year 2 Semester 1 - Game Development Project
+
 
 ## First Commit
 - Created Project
