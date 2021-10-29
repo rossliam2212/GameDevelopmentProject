@@ -1,28 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArcherMovement : MonoBehaviour {
 
+    [Header("Components:")]
     [SerializeField] private Animator animator;
-    private string currentState;
     [SerializeField] private Rigidbody2D rigidBody;
 
-    [SerializeField] private bool isFacingRight = true;
-    [SerializeField] private bool isJumping;
-    //[SerializeField] private bool isGrounded = true;
-    [SerializeField] private bool isShooting;
-
+    [Header("Variables:")]
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float jumpForce = 400f;
-
+    private float shootingDelay = 0.5f;
     private float horizontalMove = 0f;
 
+    [Header("Boolean Variables:")]
+    [SerializeField] private bool isFacingRight = true;
+    [SerializeField] private bool isJumping;
+    [SerializeField] private bool isShooting;
+    //[SerializeField] private bool isGrounded = true;
+
+    [Header("Other Objects/Components:")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject archerBullet;
-    private float shootingDelay = 0.5f;
+    private Animator mageAnimator;
+    private GameUIManager gameUIManager;
 
     // Animation States
+    private string currentState;
     const string ARCHER_ATTACK = "archer_attack";
     const string ARCHER_IDLE = "archer_idle";
 
@@ -30,6 +33,8 @@ public class ArcherMovement : MonoBehaviour {
     private void Start() {
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
+        mageAnimator = GameObject.FindGameObjectWithTag("Mage").GetComponent<Animator>();
+        gameUIManager = GameObject.FindObjectOfType(typeof(GameUIManager)) as GameUIManager;
     }
 
     private void Update() {
@@ -81,23 +86,34 @@ public class ArcherMovement : MonoBehaviour {
         }
     }
 
+    /* This method flips the archer 180 degrees to face the opposite direction. */
     private void FlipArcher() {
-        isFacingRight = !isFacingRight; // Switching the way the Archer is being labelled as facing
-        transform.Rotate(0f, 180f, 0f); // Rotating the Archer 180 deg
+        isFacingRight = !isFacingRight; 
+        transform.Rotate(0f, 180f, 0f); 
     }
 
+    /* This method instantiates an instance of the archer bullet. */
     private void Shoot() {
-        Instantiate(archerBullet, firePoint.position, firePoint.rotation); // Instantiate an instance of the archer bullet (prefab)
+        Instantiate(archerBullet, firePoint.position, firePoint.rotation);
     }
 
+    /* This method resets the players shooting. */
     private void ResetShoot() {
         isShooting = false;
-        ChangeAnimationState(ARCHER_IDLE); // Change to the idle animation
+        ChangeAnimationState(ARCHER_IDLE);
     }
 
+    /* This method changes the players animation state. */
     private void ChangeAnimationState(string newState) {
         if (currentState == newState)
             return;
         animator.Play(newState);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Mage" && mageAnimator.GetCurrentAnimatorStateInfo(0).IsName("mage_attack")) {
+            //gameUIManager.RemoveLife();
+            Debug.Log("gameUIManager.RemoveLife();");
+        }
     }
 }

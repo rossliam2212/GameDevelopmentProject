@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParallaxBackground : MonoBehaviour {
 
+    [Header("Objects/Components:")]
+    [SerializeField] private new GameObject camera;
+
+    [Header("Variables:")]
+    [SerializeField] private float parallaxEffect;
     private float length;
     private float startPosition;
-    public new GameObject camera;
-    [SerializeField] private float parallaxEffect;
 
     private void Start() {
         startPosition = transform.position.x;

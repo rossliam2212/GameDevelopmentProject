@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/* CURRENTLY NOT BEING USED */
 public class Executioner : MonoBehaviour {
 
     [SerializeField] Animator animator;

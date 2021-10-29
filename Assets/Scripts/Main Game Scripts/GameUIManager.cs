@@ -1,20 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class GameUIManager : MonoBehaviour {
 
+    // Variables
     private int score;
     private int lives = 3;
+
+    [Header("Text Components:")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timeText;
-    [SerializeField] private Image lifeImage;
-    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI gameOverScoreText;
 
-    [Header("Life Sprites")]
+    [Header("Other Components:")]
+    [SerializeField] private Image lifeImage;
+    [SerializeField] private GameObject gameOverPanel;
+
+    [Header("Life Sprites:")]
     [SerializeField] private Sprite threeLives;
     [SerializeField] private Sprite twoLives;
     [SerializeField] private Sprite oneLife;
@@ -30,10 +33,12 @@ public class GameUIManager : MonoBehaviour {
         //timeText.text = "Time: " + Time.time;
     }
 
+    /* This method increases the players score by a given amount. */
     public void IncreaseScore(int amount) {
         score += amount;
     }
 
+    /* This method removes a life from the player and changes the lifeImage sprite depending on how mnay lives are left. */
     public void RemoveLife() {
         lives--;
         switch (lives) {
@@ -50,6 +55,8 @@ public class GameUIManager : MonoBehaviour {
         }
     }
 
+    /* This method is used to end the game when the player has run of of lives. */
+    /* *NOT FINISHED* */
     private void EndGame() {
         gameOverPanel.SetActive(true);
         gameOverScoreText.text = "Score: " + score;
