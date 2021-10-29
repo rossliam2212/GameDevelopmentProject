@@ -20,3 +20,7 @@ Year 2 Semester 1 - Game Development Project
 ## Fourth Commit
 - Added Enemy Functionality - Following Player, Attacking Player, Moving between two points
 - Added Game Over UI
+
+## Fifth Commit:
+- Cleaned up all Code
+- Added Comments to Code
