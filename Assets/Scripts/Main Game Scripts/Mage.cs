@@ -24,8 +24,11 @@ public class Mage : MonoBehaviour {
 
     private int archerBulletDamage = 20;
     private int mageDeathScore = 10;
+
     private float mageFollowDistance = 3f;
     private float mageAttackDistance = 0.45f;
+    private float mageYAttackDistance = 0.5f;
+
     private float rightPoint;
     private float leftPoint;
 
@@ -87,28 +90,36 @@ public class Mage : MonoBehaviour {
 
         if (archerTransform.position.x > transform.position.x) {
 
-            if (checkAttackDistance(archerTransform.position.x, transform.position.x)) {
+            if (checkAttackDistance(archerTransform.position.x, transform.position.x) && inYRange()) {
                 //boxCollider.size = newCollider;
                 ChangeAnimationState(MAGE_ATTACK);
             }
             else {
                 //boxCollider.size = startCollider;
-                ChangeAnimationState(MAGE_RUNNING);
-                transform.Translate(Vector2.right * runSpeed * Time.deltaTime);
-                spriteRenderer.flipX = false;
+                if (!inYRange()) {
+                    MoveMage();
+                } else {
+                    ChangeAnimationState(MAGE_RUNNING);
+                    transform.Translate(Vector2.right * runSpeed * Time.deltaTime);
+                    spriteRenderer.flipX = false;
+                }
             }
         } 
         else if (archerTransform.position.x < transform.position.x) {
 
-            if (checkAttackDistance(archerTransform.position.x, transform.position.x)) {
+            if (checkAttackDistance(archerTransform.position.x, transform.position.x) && inYRange()) {
                 //boxCollider.size = newCollider;
                 ChangeAnimationState(MAGE_ATTACK);
             }
             else {
                 //boxCollider.size = startCollider;
-                ChangeAnimationState(MAGE_RUNNING);
-                transform.Translate(Vector2.left * runSpeed * Time.deltaTime);
-                spriteRenderer.flipX = true;
+                if (!inYRange()) {
+                    MoveMage();
+                } else {
+                    ChangeAnimationState(MAGE_RUNNING);
+                    transform.Translate(Vector2.left * runSpeed * Time.deltaTime);
+                    spriteRenderer.flipX = true;
+                }
             }
         }
     }
@@ -133,6 +144,14 @@ public class Mage : MonoBehaviour {
         if (Mathf.Abs(archerPosition - magePosition) < mageAttackDistance) {
             return true;
         }
+        return false;
+    }
+
+    /* This method is used to check whether or not the mage is within a certain distance on the y axis */
+    private bool inYRange() {
+        if ((archerTransform.position.y - transform.position.y) < mageYAttackDistance)
+            return true;
+
         return false;
     }
 

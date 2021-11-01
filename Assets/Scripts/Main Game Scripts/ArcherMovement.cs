@@ -115,5 +115,11 @@ public class ArcherMovement : MonoBehaviour {
             //gameUIManager.RemoveLife();
             Debug.Log("gameUIManager.RemoveLife();");
         }
+
+        if (collision.gameObject.tag == "GoldCoin") {
+            gameUIManager.GoldCoinCounter();
+            gameUIManager.IncreaseScore(gameUIManager.goldCoinPoints);
+            Destroy(collision.gameObject);
+        }
     }
 }

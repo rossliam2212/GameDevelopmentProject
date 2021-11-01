@@ -8,6 +8,8 @@ TagManager:
   - ArcherBullet
   - Executioner
   - Mage
+  - MageAttackPoint
+  - GoldCoin
   layers:
   - Default
   - TransparentFX
