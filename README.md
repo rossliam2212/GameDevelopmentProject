@@ -5,7 +5,7 @@ Year 2 Semester 1 - Game Development Project
 ## Commit 1
 - Created Project
 - Created Player Sprites & Animations
-- Added Parallax Background
+- Added Parallax Background for Infinite Scrolling
 
 ## Commit 2
 - Created Start Menu
@@ -24,3 +24,9 @@ Year 2 Semester 1 - Game Development Project
 ## Commit 5
 - Cleaned up all Code
 - Added Comments to Code
+
+## Commit 6
+- Added Infinite Platform Generator
+- Added Gold Coin Pickups
+- Updated Game UI
+- Cleaned File Structure
