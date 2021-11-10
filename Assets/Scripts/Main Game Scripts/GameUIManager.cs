@@ -20,6 +20,7 @@ public class GameUIManager : MonoBehaviour {
     [Header("Other Components:")]
     [SerializeField] private Image lifeImage;
     [SerializeField] private GameObject gameOverPanel;
+    private Mage mage;
 
     [Header("Life Sprites:")]
     [SerializeField] private Sprite threeLives;
@@ -31,6 +32,8 @@ public class GameUIManager : MonoBehaviour {
         scoreText.text = "Score: " + 0;
         timeText.text = "Time: " + 0;
         goldCoinCounter.text = "0";
+
+        mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
     }
 
     private void Update() {

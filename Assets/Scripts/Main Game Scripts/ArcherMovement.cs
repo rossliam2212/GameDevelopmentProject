@@ -23,6 +23,7 @@ public class ArcherMovement : MonoBehaviour {
     [SerializeField] private GameObject archerBullet;
     private Animator mageAnimator;
     private GameUIManager gameUIManager;
+    private Mage mage;
 
     // Animation States
     private string currentState;
@@ -35,6 +36,7 @@ public class ArcherMovement : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody2D>();
         mageAnimator = GameObject.FindGameObjectWithTag("Mage").GetComponent<Animator>();
         gameUIManager = GameObject.FindObjectOfType(typeof(GameUIManager)) as GameUIManager;
+        mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
     }
 
     private void Update() {
@@ -111,10 +113,10 @@ public class ArcherMovement : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Mage" && mageAnimator.GetCurrentAnimatorStateInfo(0).IsName("mage_attack")) {
-            //gameUIManager.RemoveLife();
-            Debug.Log("gameUIManager.RemoveLife();");
-        }
+        //if (collision.gameObject.tag == "MageAttackPoint" && mageAnimator.GetCurrentAnimatorStateInfo(0).IsName("mage_attack")) {
+        //    //gameUIManager.RemoveLife();
+        //    Debug.Log("gameUIManager.RemoveLife();");
+        //}
 
         if (collision.gameObject.tag == "GoldCoin") {
             gameUIManager.GoldCoinCounter();
