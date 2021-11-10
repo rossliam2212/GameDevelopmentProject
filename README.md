@@ -30,3 +30,6 @@ Year 2 Semester 1 - Game Development Project
 - Added Gold Coin Pickups
 - Updated Game UI
 - Cleaned File Structure
+
+## Commit 7
+- Fixed Enemy Attacking Code
