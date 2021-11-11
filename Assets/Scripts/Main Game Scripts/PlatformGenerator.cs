@@ -28,6 +28,6 @@ public class PlatformGenerator : MonoBehaviour {
     }
 
     private float randomPlatformHeight() {
-        return Random.Range(-2f, 1f);
+        return Random.Range(-0.5f, 1f);
     }
 }
