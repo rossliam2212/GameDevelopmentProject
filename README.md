@@ -33,3 +33,6 @@ Year 2 Semester 1 - Game Development Project
 
 ## Commit 7
 - Fixed Enemy Attacking Code
+
+## Commit 8
+- Added Platform Movement
