@@ -12,6 +12,7 @@ TagManager:
   - GoldCoin
   - Platform
   - BackWallTrigger
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - UI
   - Player
   - Enemies
-  - 
+  - Floor
   - 
   - 
   - 

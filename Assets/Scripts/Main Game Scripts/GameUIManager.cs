@@ -14,12 +14,14 @@ public class GameUIManager : MonoBehaviour {
     [Header("Text Components:")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI keyText;
     [SerializeField] private TextMeshProUGUI gameOverScoreText;
     [SerializeField] private TextMeshProUGUI goldCoinCounter;
 
     [Header("Other Components:")]
     [SerializeField] private Image lifeImage;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject keyImage;
     private Mage mage;
 
     [Header("Life Sprites:")]
@@ -32,13 +34,14 @@ public class GameUIManager : MonoBehaviour {
         scoreText.text = "Score: " + 0;
         timeText.text = "Time: " + 0;
         goldCoinCounter.text = "0";
+        keyText.text = "Key: ?";
+        keyImage.SetActive(false);
 
         mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
     }
 
     private void Update() {
         scoreText.text = "Score: " + score;
-        //timeText.text = "Time: " + Time.time;
         goldCoinCounter.text = "" + goldCoinsCollected;
     }
 
@@ -50,6 +53,11 @@ public class GameUIManager : MonoBehaviour {
     /* This method increments the gold coin counter by 1 every time a coin is collected */
     public void GoldCoinCounter() {
         goldCoinsCollected++;
+    }
+
+    public void EquipKey() {
+        keyText.text = "Key: ";
+        keyImage.SetActive(true);
     }
 
     /* This method removes a life from the player and changes the lifeImage sprite depending on how mnay lives are left. */

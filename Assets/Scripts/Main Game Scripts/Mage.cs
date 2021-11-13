@@ -14,9 +14,9 @@ public class Mage : MonoBehaviour {
 
     // Animation States
     private string currentState;
-    const string MAGE_IDLE = "mage_idle";
-    const string MAGE_ATTACK = "mage_attack";
-    const string MAGE_RUNNING = "mage_running";
+    private const string MAGE_IDLE = "mage_idle";
+    private const string MAGE_ATTACK = "mage_attack";
+    private const string MAGE_RUNNING = "mage_running";
 
     [Header("Variables:")]
     [SerializeField] private int mageHealth = 100;

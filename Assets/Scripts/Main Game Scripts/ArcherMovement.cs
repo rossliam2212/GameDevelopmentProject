@@ -14,9 +14,11 @@ public class ArcherMovement : MonoBehaviour {
 
     [Header("Boolean Variables:")]
     [SerializeField] private bool isFacingRight = true;
-    [SerializeField] private bool isJumping;
-    [SerializeField] private bool isShooting;
-    //[SerializeField] private bool isGrounded = true;
+    [SerializeField] private bool isGrounded = true;
+    [SerializeField] private bool isJumping = false;
+    [SerializeField] private bool isShooting = false;
+    [Space]
+    [SerializeField] private bool hasKey = false;
 
     [Header("Other Objects/Components:")]
     [SerializeField] private Transform firePoint;
@@ -27,8 +29,8 @@ public class ArcherMovement : MonoBehaviour {
 
     // Animation States
     private string currentState;
-    const string ARCHER_ATTACK = "archer_attack";
-    const string ARCHER_IDLE = "archer_idle";
+    private const string ARCHER_ATTACK = "archer_attack";
+    private const string ARCHER_IDLE = "archer_idle";
 
 
     private void Start() {
@@ -61,7 +63,7 @@ public class ArcherMovement : MonoBehaviour {
 
     private void FixedUpdate() {
         Move(horizontalMove * Time.fixedDeltaTime, isJumping);
-        isJumping = false;
+        //isJumping = false;
     }
 
     private void Move(float move, bool jump) {
@@ -83,15 +85,16 @@ public class ArcherMovement : MonoBehaviour {
             FlipArcher();
         }
 
-        if (jump) {
+        if (jump && isGrounded) {
             rigidBody.AddForce(new Vector2(0f, jumpForce));
+            isGrounded = false;
         }
     }
 
     /* This method flips the archer 180 degrees to face the opposite direction. */
     private void FlipArcher() {
         isFacingRight = !isFacingRight; 
-        transform.Rotate(0f, 180f, 0f); 
+        transform.Rotate(0f, 180f, 0f);
     }
 
     /* This method instantiates an instance of the archer bullet. */
@@ -122,6 +125,17 @@ public class ArcherMovement : MonoBehaviour {
             gameUIManager.GoldCoinCounter();
             gameUIManager.IncreaseScore(gameUIManager.goldCoinPoints);
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Key") {
+            gameUIManager.EquipKey();
+            hasKey = true;
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.layer == 8) {
+            isJumping = false;
+            isGrounded = true;
         }
     }
 }

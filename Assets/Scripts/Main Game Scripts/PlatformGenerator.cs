@@ -11,19 +11,30 @@ public class PlatformGenerator : MonoBehaviour {
 
     [Header("Variables:")]
     [SerializeField] private float distanceBetweenPlatforms = 5f;
+    [SerializeField] private bool createPlatform = true;
+
+    private int platformsGenerated = 0;
+    private const int platformsToGenerate = 10;
 
     private void Start() {
     }
 
     private void Update() {
-        float randomHeight = randomPlatformHeight();
-        Vector3 randomPlatformPosition = new Vector3(transform.position.x, randomHeight, transform.position.z);
-        Vector3 goldCoinPosition = new Vector3(transform.position.x, randomHeight + .4f, transform.position.z);
+        if (createPlatform) {
+            float randomHeight = randomPlatformHeight();
+            Vector3 randomPlatformPosition = new Vector3(transform.position.x, randomHeight, transform.position.z);
+            Vector3 goldCoinPosition = new Vector3(transform.position.x, randomHeight + .4f, transform.position.z);
 
-        if (transform.position.x < generationPoint.position.x) {
-            transform.position = new Vector2(transform.position.x + distanceBetweenPlatforms, transform.position.y);
-            Instantiate(platform, randomPlatformPosition, transform.rotation);
-            Instantiate(goldCoin, goldCoinPosition, transform.rotation);
+            if (transform.position.x < generationPoint.position.x) {
+                transform.position = new Vector2(transform.position.x + distanceBetweenPlatforms, transform.position.y);
+                Instantiate(platform, randomPlatformPosition, transform.rotation);
+                Instantiate(goldCoin, goldCoinPosition, transform.rotation);
+                platformsGenerated++;
+            }
+        }
+
+        if (platformsGenerated == platformsToGenerate) {
+            createPlatform = false;
         }
     }
 
