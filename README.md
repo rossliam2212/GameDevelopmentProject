@@ -36,3 +36,8 @@ Year 2 Semester 1 - Game Development Project
 
 ## Commit 8
 - Added Platform Movement
+
+## Commti 9
+- Fixed Player Jumping
+- Updated Game Hud
+- Added Key & Flag Sprites and Animations
