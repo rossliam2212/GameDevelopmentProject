@@ -41,4 +41,8 @@ public class Platform : MonoBehaviour {
     private float RandomNumber() {
         return Random.Range(0f, 1f);
     }
+
+    public bool isMovingUp() {
+        return movingUp;
+    }
 }

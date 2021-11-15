@@ -210,13 +210,13 @@ public class Mage : MonoBehaviour {
 
     /* This method is used to destroy the instance of the mage. */
     private void KillMage() {
+        gameUIManager.IncreaseScore(mageDeathScore);
         Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.name == "Archer Bullet(Clone)") {
             TakeDamage();
-            gameUIManager.IncreaseScore(mageDeathScore);
             Destroy(collision.gameObject);
         }
     }

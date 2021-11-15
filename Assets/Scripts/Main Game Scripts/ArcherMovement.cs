@@ -23,9 +23,9 @@ public class ArcherMovement : MonoBehaviour {
     [Header("Other Objects/Components:")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject archerBullet;
-    private Animator mageAnimator;
     private GameUIManager gameUIManager;
-    private Mage mage;
+    //private Animator mageAnimator;
+    //private Mage mage;
 
     // Animation States
     private string currentState;
@@ -36,9 +36,9 @@ public class ArcherMovement : MonoBehaviour {
     private void Start() {
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
-        mageAnimator = GameObject.FindGameObjectWithTag("Mage").GetComponent<Animator>();
+        //mageAnimator = GameObject.FindGameObjectWithTag("Mage").GetComponent<Animator>();
         gameUIManager = GameObject.FindObjectOfType(typeof(GameUIManager)) as GameUIManager;
-        mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
+        //mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
     }
 
     private void Update() {
@@ -133,7 +133,8 @@ public class ArcherMovement : MonoBehaviour {
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.layer == 8) {
+        // Colliding with Floor & Platform Layers
+        if (collision.gameObject.layer == 8 || collision.gameObject.layer == 9) {
             isJumping = false;
             isGrounded = true;
         }

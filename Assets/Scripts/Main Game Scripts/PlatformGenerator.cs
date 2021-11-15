@@ -8,6 +8,7 @@ public class PlatformGenerator : MonoBehaviour {
     [SerializeField] private Transform generationPoint;
     [SerializeField] private GameObject platform;
     [SerializeField] private GameObject goldCoin;
+    [SerializeField] private GameObject mage;
 
     [Header("Variables:")]
     [SerializeField] private float distanceBetweenPlatforms = 5f;
