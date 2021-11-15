@@ -41,3 +41,8 @@ Year 2 Semester 1 - Game Development Project
 - Fixed Player Jumping
 - Updated Game Hud
 - Added Key & Flag Sprites and Animations
+
+## Commit 10
+- Added Executioner Enemy Script & Animations
+- Added Second Level Scene
+- Added Tilemaps & Palettes for the Second Level
