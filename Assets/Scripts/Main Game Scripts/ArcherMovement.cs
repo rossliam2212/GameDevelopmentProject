@@ -111,6 +111,8 @@ public class ArcherMovement : MonoBehaviour {
                 if (upgradedBulletsShotCounter % 5 == 0) {
                     upgradedBullet = false;
                     upgradedBulletsShotCounter = 0;
+                    gameUIManager.resetArrowImage();
+                    gameUIManager.resetAmmo();
                 }
                 ammo--;
             } else {
@@ -161,11 +163,18 @@ public class ArcherMovement : MonoBehaviour {
         upgradedBullet = state;
     }
 
+    public bool getUpgradedBullet() {
+        return upgradedBullet;
+    }
+
     public int getAmmo() {
         return ammo;
     }
 
     public void addAmmo(int amount) {
         ammo += amount;
+    }
+    public void setAmmo(int amount) {
+        ammo = amount;
     }
 }

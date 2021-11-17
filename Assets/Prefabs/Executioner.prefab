@@ -59,8 +59,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4185939174539801223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.059, y: -2.291, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalPosition: {x: -0.995, y: -2.335, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4185939174647364863}
   - {fileID: 4185939174425468909}
@@ -208,7 +208,8 @@ MonoBehaviour:
   isFacingRight: 1
   isAttacking: 0
   executionerAttackRange: 0.16
-  archerTransform: {fileID: 0}
+  archerTransform: {fileID: 3923784859222364568, guid: 958e94c7446e4274fba09a33fa6c7b2c, type: 3}
+  goldCoin: {fileID: 2476572423090193876, guid: 4a1a1a8220fea854983d60850acc9cf1, type: 3}
 --- !u!1 &4185939174647364862
 GameObject:
   m_ObjectHideFlags: 0

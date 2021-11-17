@@ -5,7 +5,7 @@ using TMPro;
 public class GameUIManager : MonoBehaviour {
 
     // Variables
-    private int score;
+    private int score = 0;
     private int lives = 3;
     private int goldCoinsCollected;
 
@@ -13,15 +13,16 @@ public class GameUIManager : MonoBehaviour {
 
     [Header("Text Components:")]
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI timeText;
+    //[SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI keyText;
     [SerializeField] private TextMeshProUGUI gameOverScoreText;
     [SerializeField] private TextMeshProUGUI goldCoinCounter;
-
     [Space]
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private GameObject greenArrowImage;
     [SerializeField] private GameObject redArrowImage;
+
+    private int tempAmmo = 0;
 
     [Header("Other Components:")]
     [SerializeField] private Image lifeImage;
@@ -37,8 +38,8 @@ public class GameUIManager : MonoBehaviour {
     [SerializeField] private Sprite zeroLives;
 
     private void Start() {
-        scoreText.text = "Score: " + 0;
-        timeText.text = "Time: " + 0;
+        scoreText.text = "Score: " + score;
+        //timeText.text = "Time: " + 0;
         goldCoinCounter.text = "0";
 
         ammoText.text = "Ammo: x7";
@@ -68,13 +69,18 @@ public class GameUIManager : MonoBehaviour {
         goldCoinsCollected++;
 
         if (goldCoinsCollected % 5 == 0) {
+            tempAmmo = archer.getAmmo();
+            archer.setAmmo(0);
+
             greenArrowImage.SetActive(false);
             redArrowImage.SetActive(true);
 
             archer.setUpgradedBullet(true);
             archer.addAmmo(5);
         } else {
-            archer.addAmmo(1);
+            if (!archer.getUpgradedBullet()) {
+                archer.addAmmo(1);
+            }
         }
     }
 
@@ -100,7 +106,13 @@ public class GameUIManager : MonoBehaviour {
         }
     }
 
-    public void setArrowImage() {
+    public void resetArrowImage() {
+        greenArrowImage.SetActive(true);
+        redArrowImage.SetActive(false);
+    }
+
+    public void resetAmmo() {
+        archer.setAmmo(tempAmmo);
     }
 
     /* This method is used to end the game when the player has run of of lives. */
