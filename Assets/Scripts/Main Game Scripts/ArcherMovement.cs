@@ -9,8 +9,11 @@ public class ArcherMovement : MonoBehaviour {
     [Header("Variables:")]
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float jumpForce = 400f;
+    [SerializeField] private int ammo = 7;
     private float shootingDelay = 0.5f;
     private float horizontalMove = 0f;
+
+    private int upgradedBulletsShotCounter = 0;
 
     [Header("Boolean Variables:")]
     [SerializeField] private bool isFacingRight = true;
@@ -19,10 +22,14 @@ public class ArcherMovement : MonoBehaviour {
     [SerializeField] private bool isShooting = false;
     [Space]
     [SerializeField] private bool hasKey = false;
+    [SerializeField] private bool upgradedBullet = false;
+
 
     [Header("Other Objects/Components:")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject archerBullet;
+    [SerializeField] private GameObject archerUpgradedBullet;
+
     private GameUIManager gameUIManager;
     //private Animator mageAnimator;
     //private Mage mage;
@@ -36,9 +43,7 @@ public class ArcherMovement : MonoBehaviour {
     private void Start() {
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
-        //mageAnimator = GameObject.FindGameObjectWithTag("Mage").GetComponent<Animator>();
         gameUIManager = GameObject.FindObjectOfType(typeof(GameUIManager)) as GameUIManager;
-        //mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
     }
 
     private void Update() {
@@ -63,7 +68,6 @@ public class ArcherMovement : MonoBehaviour {
 
     private void FixedUpdate() {
         Move(horizontalMove * Time.fixedDeltaTime, isJumping);
-        //isJumping = false;
     }
 
     private void Move(float move, bool jump) {
@@ -99,7 +103,21 @@ public class ArcherMovement : MonoBehaviour {
 
     /* This method instantiates an instance of the archer bullet. */
     private void Shoot() {
-        Instantiate(archerBullet, firePoint.position, firePoint.rotation);
+        if (ammo > 0) {
+            if (upgradedBullet) {
+                Instantiate(archerUpgradedBullet, firePoint.position, firePoint.rotation);
+                upgradedBulletsShotCounter++;
+
+                if (upgradedBulletsShotCounter % 5 == 0) {
+                    upgradedBullet = false;
+                    upgradedBulletsShotCounter = 0;
+                }
+                ammo--;
+            } else {
+                Instantiate(archerBullet, firePoint.position, firePoint.rotation);
+                ammo--;
+            }
+        }
     }
 
     /* This method resets the players shooting. */
@@ -116,11 +134,6 @@ public class ArcherMovement : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        //if (collision.gameObject.tag == "MageAttackPoint" && mageAnimator.GetCurrentAnimatorStateInfo(0).IsName("mage_attack")) {
-        //    //gameUIManager.RemoveLife();
-        //    Debug.Log("gameUIManager.RemoveLife();");
-        //}
-
         if (collision.gameObject.tag == "GoldCoin") {
             gameUIManager.GoldCoinCounter();
             gameUIManager.IncreaseScore(gameUIManager.goldCoinPoints);
@@ -138,5 +151,21 @@ public class ArcherMovement : MonoBehaviour {
             isJumping = false;
             isGrounded = true;
         }
+    }
+
+    public bool getIsJumping() {
+        return isJumping;
+    }
+
+    public void setUpgradedBullet(bool state) {
+        upgradedBullet = state;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public void addAmmo(int amount) {
+        ammo += amount;
     }
 }

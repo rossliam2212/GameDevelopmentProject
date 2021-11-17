@@ -27,6 +27,7 @@ public class Mage : MonoBehaviour {
     [SerializeField] private bool isAttacking = false;
 
     private int archerBulletDamage = 20;
+    private int archerUpgradedBulletDamage = 40;
     private int mageDeathScore = 10;
 
     [SerializeField] private float mageAttackRange = 0.5f;
@@ -40,6 +41,7 @@ public class Mage : MonoBehaviour {
 
     [Header("Other Objects/Components:")]
     [SerializeField] private Transform archerTransform;
+    [SerializeField] private GameObject goldCoin;
     private GameUIManager gameUIManager;
 
 
@@ -201,8 +203,8 @@ public class Mage : MonoBehaviour {
     }
 
     /* This method is used to take damage away from the mage. */
-    private void TakeDamage() {
-        mageHealth -= archerBulletDamage;
+    private void TakeDamage(int amount) {
+        mageHealth -= amount;
         if (mageHealth <= 0) {
             KillMage();
         }
@@ -211,12 +213,18 @@ public class Mage : MonoBehaviour {
     /* This method is used to destroy the instance of the mage. */
     private void KillMage() {
         gameUIManager.IncreaseScore(mageDeathScore);
+        Instantiate(goldCoin, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.name == "Archer Bullet(Clone)") {
-            TakeDamage();
+        if (collision.gameObject.tag == "ArcherBullet") {
+            TakeDamage(archerBulletDamage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "ArcherUpgradedBullet") {
+            TakeDamage(archerUpgradedBulletDamage);
             Destroy(collision.gameObject);
         }
     }

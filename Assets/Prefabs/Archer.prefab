@@ -206,3 +206,4 @@ MonoBehaviour:
   hasKey: 0
   firePoint: {fileID: 3923784858663406043}
   archerBullet: {fileID: 1429664065189676193, guid: f32a37f78e741fe4d84dc18a3b2185f3, type: 3}
+  archerUpgradedBullet: {fileID: 2508410664066841990, guid: d23dc299c8b392647a62fd7a69e6ca3d, type: 3}

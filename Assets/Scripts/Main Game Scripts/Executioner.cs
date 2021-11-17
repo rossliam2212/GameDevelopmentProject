@@ -24,6 +24,7 @@ public class Executioner : MonoBehaviour {
     [SerializeField] private bool isAttacking = false;
 
     private int archerBulletDamage = 10;
+    private int archerUpgradedBulletDamage = 20;
     private int executionerDeathScore = 20;
 
     [SerializeField] private float executionerAttackRange = .5f;
@@ -36,6 +37,7 @@ public class Executioner : MonoBehaviour {
 
     [Header("Other Objects/Components:")]
     [SerializeField] private Transform archerTransform;
+    [SerializeField] private GameObject goldCoin;
     private GameUIManager gameUIManager;
 
 
@@ -148,8 +150,8 @@ public class Executioner : MonoBehaviour {
     }
 
     /* This method is used to take damage away from the executioner. */
-    private void TakeDamage() {
-        executionerHealth -= archerBulletDamage;
+    private void TakeDamage(int amount) {
+        executionerHealth -= amount;
         if (executionerHealth <= 0) {
             KillExecutioner();
         }
@@ -158,12 +160,18 @@ public class Executioner : MonoBehaviour {
     /* This method is used to destroy the instance of the executioner. */
     private void KillExecutioner() {
         gameUIManager.IncreaseScore(executionerDeathScore);
+        Instantiate(goldCoin, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "ArcherBullet") {
-            TakeDamage();
+            TakeDamage(archerBulletDamage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "ArcherUpgradedBullet") {
+            TakeDamage(archerUpgradedBulletDamage);
             Destroy(collision.gameObject);
         }
     }

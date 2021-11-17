@@ -18,11 +18,17 @@ public class GameUIManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI gameOverScoreText;
     [SerializeField] private TextMeshProUGUI goldCoinCounter;
 
+    [Space]
+    [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private GameObject greenArrowImage;
+    [SerializeField] private GameObject redArrowImage;
+
     [Header("Other Components:")]
     [SerializeField] private Image lifeImage;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject keyImage;
     private Mage mage;
+    private ArcherMovement archer;
 
     [Header("Life Sprites:")]
     [SerializeField] private Sprite threeLives;
@@ -34,15 +40,22 @@ public class GameUIManager : MonoBehaviour {
         scoreText.text = "Score: " + 0;
         timeText.text = "Time: " + 0;
         goldCoinCounter.text = "0";
+
+        ammoText.text = "Ammo: x7";
+        greenArrowImage.SetActive(true);
+        redArrowImage.SetActive(false);
+
         keyText.text = "Key: ?";
         keyImage.SetActive(false);
 
         mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
+        archer = GameObject.FindObjectOfType(typeof(ArcherMovement)) as ArcherMovement;
     }
 
     private void Update() {
         scoreText.text = "Score: " + score;
         goldCoinCounter.text = "" + goldCoinsCollected;
+        ammoText.text = "Ammo: x" + archer.getAmmo();
     }
 
     /* This method increases the players score by a given amount. */
@@ -53,6 +66,16 @@ public class GameUIManager : MonoBehaviour {
     /* This method increments the gold coin counter by 1 every time a coin is collected */
     public void GoldCoinCounter() {
         goldCoinsCollected++;
+
+        if (goldCoinsCollected % 5 == 0) {
+            greenArrowImage.SetActive(false);
+            redArrowImage.SetActive(true);
+
+            archer.setUpgradedBullet(true);
+            archer.addAmmo(5);
+        } else {
+            archer.addAmmo(1);
+        }
     }
 
     public void EquipKey() {
@@ -75,6 +98,9 @@ public class GameUIManager : MonoBehaviour {
                 EndGame();
                 break;
         }
+    }
+
+    public void setArrowImage() {
     }
 
     /* This method is used to end the game when the player has run of of lives. */
