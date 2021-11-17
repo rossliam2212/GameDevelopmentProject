@@ -46,3 +46,10 @@ Year 2 Semester 1 - Game Development Project
 - Added Executioner Enemy Script & Animations
 - Added Second Level Scene
 - Added Tilemaps & Palettes for the Second Level
+
+## Commit 11
+- Added Ammo Limits for Player
+- Added Stronger Bullet for Player
+- Updated Game HUD
+- Added New Tilemaps & Palettes for Second Level
+- Updated Second Level
