@@ -53,3 +53,8 @@ Year 2 Semester 1 - Game Development Project
 - Updated Game HUD
 - Added New Tilemaps & Palettes for Second Level
 - Updated Second Level
+
+## Commit 12
+- Added Final Boss Level
+- Added Boss Sprites & Animations
+- Added Audio Manager Scripts & Sound Effects
