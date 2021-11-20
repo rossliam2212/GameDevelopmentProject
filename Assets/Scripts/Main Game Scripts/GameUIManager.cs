@@ -30,6 +30,7 @@ public class GameUIManager : MonoBehaviour {
     [SerializeField] private GameObject keyImage;
     private Mage mage;
     private ArcherMovement archer;
+    private AudioManager audioManager;
 
     [Header("Life Sprites:")]
     [SerializeField] private Sprite threeLives;
@@ -51,6 +52,7 @@ public class GameUIManager : MonoBehaviour {
 
         mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
         archer = GameObject.FindObjectOfType(typeof(ArcherMovement)) as ArcherMovement;
+        audioManager = GameObject.FindObjectOfType(typeof(AudioManager)) as AudioManager;
     }
 
     private void Update() {
@@ -69,6 +71,7 @@ public class GameUIManager : MonoBehaviour {
         goldCoinsCollected++;
 
         if (goldCoinsCollected % 5 == 0) {
+            audioManager.Play("UpgradedArrow");
             tempAmmo = archer.getAmmo();
             archer.setAmmo(0);
 

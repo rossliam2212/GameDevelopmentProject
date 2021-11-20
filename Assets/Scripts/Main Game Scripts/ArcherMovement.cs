@@ -31,6 +31,7 @@ public class ArcherMovement : MonoBehaviour {
     [SerializeField] private GameObject archerUpgradedBullet;
 
     private GameUIManager gameUIManager;
+    private AudioManager audioManager;
     //private Animator mageAnimator;
     //private Mage mage;
 
@@ -44,6 +45,7 @@ public class ArcherMovement : MonoBehaviour {
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         gameUIManager = GameObject.FindObjectOfType(typeof(GameUIManager)) as GameUIManager;
+        audioManager = GameObject.FindObjectOfType(typeof(AudioManager)) as AudioManager;
     }
 
     private void Update() {
@@ -61,6 +63,8 @@ public class ArcherMovement : MonoBehaviour {
 
             isShooting = true;
             ChangeAnimationState(ARCHER_ATTACK); // Change to the shooting animation
+            //FindObjectOfType<AudioManager>().Play("ArrowShot");
+            audioManager.Play("ArrowShot");
             Invoke("Shoot", shootingDelay); // Call the shoot method with a delay to match up with the animation
             Invoke("ResetShoot", shootingDelay); // Call the shooting reset method
         }
@@ -103,7 +107,7 @@ public class ArcherMovement : MonoBehaviour {
 
     /* This method instantiates an instance of the archer bullet. */
     private void Shoot() {
-        if (ammo > 0) {
+        if (ammo > 0) {       
             if (upgradedBullet) {
                 Instantiate(archerUpgradedBullet, firePoint.position, firePoint.rotation);
                 upgradedBulletsShotCounter++;
@@ -137,6 +141,8 @@ public class ArcherMovement : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "GoldCoin") {
+            //FindObjectOfType<AudioManager>().Play("CoinPickup");
+            audioManager.Play("CoinPickup");
             gameUIManager.GoldCoinCounter();
             gameUIManager.IncreaseScore(gameUIManager.goldCoinPoints);
             Destroy(collision.gameObject);

@@ -17,6 +17,7 @@ public class Mage : MonoBehaviour {
     private const string MAGE_IDLE = "mage_idle";
     private const string MAGE_ATTACK = "mage_attack";
     private const string MAGE_RUNNING = "mage_running";
+    private const string MAGE_REGEN = "mage_regen";
 
     [Header("Variables:")]
     [SerializeField] private int mageHealth = 100;
@@ -67,6 +68,7 @@ public class Mage : MonoBehaviour {
     /* The mage is set to move between two points on the x-axis. */
     private void MoveMage() {
         ChangeAnimationState(MAGE_IDLE);
+
         if (isFacingRight) {
             transform.Translate(Vector2.right * walkSpeed * Time.deltaTime);
             isFacingRight = true;
@@ -158,17 +160,24 @@ public class Mage : MonoBehaviour {
         }
     }
 
+    /* This method is used to reset the attack timer for the mage */
     private void ResetAttacking() {
         isAttacking = false;
         attackTimer = 0f;
     }
 
+    /* This method draws the circle radius of the mages attack distance to make it easier to edit */
     private void OnDrawGizmosSelected() {
         if (isFacingRight) {
             Gizmos.DrawWireSphere(rightAttackPoint.position, mageAttackRange);
         } else {
             Gizmos.DrawWireSphere(leftAttackPoint.position, mageAttackRange);
         }
+    }
+
+    private void Regenerate() {
+        ChangeAnimationState(MAGE_REGEN);
+        mageHealth = 100;
     }
 
     /* This method is used to change the mages animation state. */

@@ -14,6 +14,7 @@ TagManager:
   - BackWallTrigger
   - Key
   - ArcherUpgradedBullet
+  - Boss
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,7 @@ public class Executioner : MonoBehaviour {
     [Header("Variables:")]
     [SerializeField] private int executionerHealth = 100;
     [SerializeField] private float moveSpeed = .5f;
+    [SerializeField] private float runSpeed = 2f;
     [Space]
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private bool isAttacking = false;
@@ -28,6 +29,7 @@ public class Executioner : MonoBehaviour {
     private int executionerDeathScore = 20;
 
     [SerializeField] private float executionerAttackRange = .5f;
+    private float executionerAttackDistance = 3f;
     private float executionerFollowDistance = 3f;
     private float executionerYAttackDistance = 0.5f;
     private float attackTimer = 0f;
@@ -51,7 +53,11 @@ public class Executioner : MonoBehaviour {
     }
 
     private void Update() {
-        MoveExecutioner();
+        if (checkFollowDistance(archerTransform.position.x, transform.position.x)) {
+            FollowArcher();
+        } else {
+            MoveExecutioner();
+        }
     }
 
     private void MoveExecutioner() {
@@ -72,6 +78,41 @@ public class Executioner : MonoBehaviour {
         if (transform.position.x < leftPoint) {
             isFacingRight = true;
             spriteRenderer.flipX = false;
+        }
+    }
+
+    private void FollowArcher() {
+        if (archerTransform.position.x > transform.position.x) {
+
+            if (checkAttackDistance(archerTransform.position.x, transform.position.x) && inYRange()) {
+                ChangeAnimationState(EXECUTIONER_ATTACK);
+                CheckAttack();
+            } else {
+                if (!inYRange()) {
+                    MoveExecutioner();
+                } else {
+                    isFacingRight = true;
+                    //ChangeAnimationState(MAGE_RUNNING);
+                    transform.Translate(Vector2.right * runSpeed * Time.deltaTime);
+                    spriteRenderer.flipX = false;
+                }
+            }
+        }
+        else if (archerTransform.position.x < transform.position.x) {
+
+            if (checkAttackDistance(archerTransform.position.x, transform.position.x) && inYRange()) {
+                ChangeAnimationState(EXECUTIONER_ATTACK);
+                CheckAttack();
+            } else {
+                if (!inYRange()) {
+                    MoveExecutioner();
+                } else {
+                    isFacingRight = false;
+                    //ChangeAnimationState(MAGE_RUNNING);
+                    transform.Translate(Vector2.left * runSpeed * Time.deltaTime);
+                    spriteRenderer.flipX = true;
+                }
+            }
         }
     }
 
@@ -135,7 +176,7 @@ public class Executioner : MonoBehaviour {
 
     /* This method is used to check whether or not the executioner is within attacking distance of the player. */
     private bool checkAttackDistance(float archerPosition, float executionerPosition) {
-        if (Mathf.Abs(archerPosition - executionerPosition) < executionerFollowDistance) {
+        if (Mathf.Abs(archerPosition - executionerPosition) < executionerAttackDistance) {
             return true;
         }
         return false;

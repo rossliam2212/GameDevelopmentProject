@@ -22,7 +22,7 @@ public class CameraFollowingPlayerCastle : MonoBehaviour {
         temp.x = playerTransform.position.x;
 
         if (!archer.getIsJumping()) {
-            temp.y = playerTransform.position.y + 2f;
+            temp.y = playerTransform.position.y + 1f;
         }
 
         // Setting the camer's temporary position back to the current position
