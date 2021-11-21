@@ -58,3 +58,9 @@ Year 2 Semester 1 - Game Development Project
 - Added Final Boss Level
 - Added Boss Sprites & Animations
 - Added Audio Manager Scripts & Sound Effects
+
+## Commit 13
+- Added Boss Script 
+- Added Additional Sound Effects & Background Music
+- Completed Final Boss Level
+- Added Game Over Win Scene
