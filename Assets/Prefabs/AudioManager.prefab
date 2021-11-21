@@ -47,12 +47,60 @@ MonoBehaviour:
   - name: CoinPickup
     clip: {fileID: 8300000, guid: 7df44aacba03dcf4ebdeb3126b92617d, type: 3}
     volume: 1
+    loop: 0
     source: {fileID: 0}
   - name: UpgradedArrow
     clip: {fileID: 8300000, guid: 168b31be3bf4caf4dad9ff86d5c30d2f, type: 3}
     volume: 1
+    loop: 0
     source: {fileID: 0}
   - name: ArrowShot
     clip: {fileID: 8300000, guid: bebdcdf65e93b1a45886014c453ceaed, type: 3}
     volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GolemGrowl
+    clip: {fileID: 8300000, guid: 0f0073d9c463f9f4b992249145dd6bb9, type: 3}
+    volume: 0.1
+    loop: 1
+    source: {fileID: 0}
+  - name: Diamond
+    clip: {fileID: 8300000, guid: fffe606ad45dd9c4483f4f75dfaed097, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MainMusic
+    clip: {fileID: 8300000, guid: 79591226660bc4d469b2e847ddc97302, type: 3}
+    volume: 0.5
+    loop: 1
+    source: {fileID: 0}
+  - name: CastleMusic
+    clip: {fileID: 8300000, guid: 9058490e0734cf84cb8f60608b3bbbdc, type: 3}
+    volume: 0.5
+    loop: 1
+    source: {fileID: 0}
+  - name: BossMusic
+    clip: {fileID: 8300000, guid: 91088557ce59df94fa22703bffb0cf55, type: 3}
+    volume: 0.5
+    loop: 1
+    source: {fileID: 0}
+  - name: KeyPickup
+    clip: {fileID: 8300000, guid: 152f66c273159f0459c7e0508bc47bf4, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Running
+    clip: {fileID: 8300000, guid: b62989fb7a2b9704aa28665df8e486d9, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordSwing
+    clip: {fileID: 8300000, guid: b5eb9976af16e7744863ef50da724722, type: 3}
+    volume: 0.7
+    loop: 0
+    source: {fileID: 0}
+  - name: VictoryMusic
+    clip: {fileID: 8300000, guid: 535878e7da8b97e4abaaf7ae21ba86fb, type: 3}
+    volume: 0.5
+    loop: 1
     source: {fileID: 0}

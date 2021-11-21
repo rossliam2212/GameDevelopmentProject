@@ -63,7 +63,6 @@ public class ArcherMovement : MonoBehaviour {
 
             isShooting = true;
             ChangeAnimationState(ARCHER_ATTACK); // Change to the shooting animation
-            //FindObjectOfType<AudioManager>().Play("ArrowShot");
             audioManager.Play("ArrowShot");
             Invoke("Shoot", shootingDelay); // Call the shoot method with a delay to match up with the animation
             Invoke("ResetShoot", shootingDelay); // Call the shooting reset method
@@ -75,6 +74,11 @@ public class ArcherMovement : MonoBehaviour {
     }
 
     private void Move(float move, bool jump) {
+        if (move != 0 && isGrounded && GetComponent<AudioSource>().isPlaying == false) {
+            GetComponent<AudioSource>().Play();
+        } else {
+            GetComponent<AudioSource>().Stop();
+        }
 
         // If the Archer is facing right, move right
         if (isFacingRight) 
@@ -139,9 +143,12 @@ public class ArcherMovement : MonoBehaviour {
         animator.Play(newState);
     }
 
+    public void KillArcher() {
+        Destroy(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "GoldCoin") {
-            //FindObjectOfType<AudioManager>().Play("CoinPickup");
             audioManager.Play("CoinPickup");
             gameUIManager.GoldCoinCounter();
             gameUIManager.IncreaseScore(gameUIManager.goldCoinPoints);
@@ -149,6 +156,7 @@ public class ArcherMovement : MonoBehaviour {
         }
 
         if (collision.gameObject.tag == "Key") {
+            audioManager.Play("KeyPickup");
             gameUIManager.EquipKey();
             hasKey = true;
             Destroy(collision.gameObject);
@@ -158,6 +166,15 @@ public class ArcherMovement : MonoBehaviour {
         if (collision.gameObject.layer == 8 || collision.gameObject.layer == 9) {
             isJumping = false;
             isGrounded = true;
+        }
+
+        if (collision.gameObject.tag == "BossBullet") {
+            gameUIManager.RemoveLife();
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Diamond") {
+            gameUIManager.WinGame();
         }
     }
 
@@ -182,5 +199,9 @@ public class ArcherMovement : MonoBehaviour {
     }
     public void setAmmo(int amount) {
         ammo = amount;
+    }
+
+    public bool getHasKey() {
+        return hasKey;
     }
 }

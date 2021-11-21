@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3590320825548261185}
   - component: {fileID: 1013133519618259719}
   - component: {fileID: 8148996071181276533}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Archer Bullet
   m_TagString: ArcherBullet
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: e6baf50b5b661d743ae90811aa45d73e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

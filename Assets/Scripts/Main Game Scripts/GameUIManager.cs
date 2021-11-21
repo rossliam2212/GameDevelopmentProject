@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameUIManager : MonoBehaviour {
 
@@ -23,6 +24,8 @@ public class GameUIManager : MonoBehaviour {
     [SerializeField] private GameObject redArrowImage;
 
     private int tempAmmo = 0;
+    private int currentLevel;
+    private int nextLevel;
 
     [Header("Other Components:")]
     [SerializeField] private Image lifeImage;
@@ -31,6 +34,7 @@ public class GameUIManager : MonoBehaviour {
     private Mage mage;
     private ArcherMovement archer;
     private AudioManager audioManager;
+    private LevelChanger levelChanger;
 
     [Header("Life Sprites:")]
     [SerializeField] private Sprite threeLives;
@@ -53,6 +57,10 @@ public class GameUIManager : MonoBehaviour {
         mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
         archer = GameObject.FindObjectOfType(typeof(ArcherMovement)) as ArcherMovement;
         audioManager = GameObject.FindObjectOfType(typeof(AudioManager)) as AudioManager;
+        levelChanger = GameObject.FindObjectOfType(typeof(LevelChanger)) as LevelChanger;
+
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
+        nextLevel = currentLevel + 1;
     }
 
     private void Update() {
@@ -119,9 +127,15 @@ public class GameUIManager : MonoBehaviour {
     }
 
     /* This method is used to end the game when the player has run of of lives. */
-    /* *NOT FINISHED* */
     private void EndGame() {
         gameOverPanel.SetActive(true);
         gameOverScoreText.text = "Score: " + score;
+        //Time.timeScale = 0;
+        archer.KillArcher();
+    }
+
+    public void WinGame() {
+        //Time.timeScale = 0;
+        levelChanger.FadeToLevel(nextLevel);
     }
 }

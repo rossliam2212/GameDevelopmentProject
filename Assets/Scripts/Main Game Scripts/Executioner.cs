@@ -23,6 +23,7 @@ public class Executioner : MonoBehaviour {
     [Space]
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private bool isAttacking = false;
+    [SerializeField] private bool holdingKey = false;
 
     private int archerBulletDamage = 10;
     private int archerUpgradedBulletDamage = 20;
@@ -40,16 +41,22 @@ public class Executioner : MonoBehaviour {
     [Header("Other Objects/Components:")]
     [SerializeField] private Transform archerTransform;
     [SerializeField] private GameObject goldCoin;
+    [SerializeField] private GameObject key;
     private GameUIManager gameUIManager;
+    private AudioManager audioManager;
 
 
     private void Start() {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         gameUIManager = GameObject.FindObjectOfType(typeof(GameUIManager)) as GameUIManager;
+        audioManager = GameObject.FindObjectOfType(typeof(AudioManager)) as AudioManager;
 
-        // Setting up the two points on the x-axis that the mage moves between, if it is not following the player.
+        // Setting up the two points on the x-axis that the executioner moves between, if it is not following the player.
         rightPoint = transform.position.x + 3;
         leftPoint = transform.position.x - 3;
+
+        Physics2D.IgnoreLayerCollision(7, 10); // Ignoring collision with gold coins
     }
 
     private void Update() {
@@ -82,6 +89,10 @@ public class Executioner : MonoBehaviour {
     }
 
     private void FollowArcher() {
+
+        if (archerTransform == null)
+            return;
+
         if (archerTransform.position.x > transform.position.x) {
 
             if (checkAttackDistance(archerTransform.position.x, transform.position.x) && inYRange()) {
@@ -201,7 +212,11 @@ public class Executioner : MonoBehaviour {
     /* This method is used to destroy the instance of the executioner. */
     private void KillExecutioner() {
         gameUIManager.IncreaseScore(executionerDeathScore);
-        Instantiate(goldCoin, transform.position, transform.rotation);
+        if (holdingKey) {
+            Instantiate(key, transform.position, transform.rotation);
+        } else {
+            Instantiate(goldCoin, transform.position, transform.rotation);
+        }
         Destroy(gameObject);
     }
 

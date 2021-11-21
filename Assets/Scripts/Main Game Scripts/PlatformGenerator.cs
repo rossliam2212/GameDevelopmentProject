@@ -15,7 +15,7 @@ public class PlatformGenerator : MonoBehaviour {
     [SerializeField] private bool createPlatform = true;
 
     private int platformsGenerated = 0;
-    private const int platformsToGenerate = 10;
+    private const int platformsToGenerate = 30;
 
     private void Start() {
     }

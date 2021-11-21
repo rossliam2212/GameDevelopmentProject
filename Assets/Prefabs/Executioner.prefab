@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4185939174425468909}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4185939174539801226}
   - component: {fileID: 4185939174539801221}
   - component: {fileID: 4185939174539801220}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Executioner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 15
   m_Sprite: {fileID: 8793639957104055765, guid: 213e3b35c3be959419a1b2993673dea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -205,11 +205,14 @@ MonoBehaviour:
     m_Bits: 64
   executionerHealth: 100
   moveSpeed: 0.5
+  runSpeed: 2
   isFacingRight: 1
   isAttacking: 0
+  holdingKey: 0
   executionerAttackRange: 0.16
   archerTransform: {fileID: 3923784859222364568, guid: 958e94c7446e4274fba09a33fa6c7b2c, type: 3}
   goldCoin: {fileID: 2476572423090193876, guid: 4a1a1a8220fea854983d60850acc9cf1, type: 3}
+  key: {fileID: 5782877692014899627, guid: 3e1117e89f3c2be4f823960a5b7c0a70, type: 3}
 --- !u!1 &4185939174647364862
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4185939174647364863}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}

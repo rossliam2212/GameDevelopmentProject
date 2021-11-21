@@ -14,18 +14,19 @@ public class CameraFollowingPlayerCastle : MonoBehaviour {
 
 
     private void LateUpdate() {
+        if (playerTransform != null) {
+            // Storing camera's current position
+            Vector3 temp = transform.position;
 
-        // Storing camera's current position
-        Vector3 temp = transform.position;
+            // Setting the camera's x & y position equal to the player's x & y position
+            temp.x = playerTransform.position.x;
 
-        // Setting the camera's x & y position equal to the player's x & y position
-        temp.x = playerTransform.position.x;
+            if (!archer.getIsJumping()) {
+                temp.y = playerTransform.position.y + 1f;
+            }
 
-        if (!archer.getIsJumping()) {
-            temp.y = playerTransform.position.y + 1f;
+            // Setting the camer's temporary position back to the current position
+            transform.position = temp;
         }
-
-        // Setting the camer's temporary position back to the current position
-        transform.position = temp;
     }
 }

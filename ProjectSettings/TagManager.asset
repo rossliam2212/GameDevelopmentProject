@@ -15,6 +15,9 @@ TagManager:
   - Key
   - ArcherUpgradedBullet
   - Boss
+  - BossBullet
+  - MapEdge
+  - Diamond
   layers:
   - Default
   - TransparentFX
@@ -26,9 +29,9 @@ TagManager:
   - Enemies
   - Floor
   - Platform
-  - 
-  - 
-  - 
+  - GoldCoin
+  - Bullets
+  - BossBullet
   - 
   - 
   - 

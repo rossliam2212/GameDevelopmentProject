@@ -26,6 +26,7 @@ public class Mage : MonoBehaviour {
     [Space]
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private bool isAttacking = false;
+    [SerializeField] private bool holdingKey = false;
 
     private int archerBulletDamage = 20;
     private int archerUpgradedBulletDamage = 40;
@@ -43,24 +44,31 @@ public class Mage : MonoBehaviour {
     [Header("Other Objects/Components:")]
     [SerializeField] private Transform archerTransform;
     [SerializeField] private GameObject goldCoin;
+    [SerializeField] private GameObject key;
     private GameUIManager gameUIManager;
+    private AudioManager audioManager;
 
 
     private void Start() {
         animator = GetComponent<Animator>();
         gameUIManager = GameObject.FindObjectOfType(typeof(GameUIManager)) as GameUIManager;
+        audioManager = GameObject.FindObjectOfType(typeof(AudioManager)) as AudioManager;
 
         // Setting up the two points on the x-axis that the mage moves between, if it is not following the player.
         rightPoint = transform.position.x + 3;
         leftPoint = transform.position.x - 3;
+
+        Physics2D.IgnoreLayerCollision(7, 10); // Ignoring collision with gold coins
     }
 
     private void Update() {
-        if (checkFollowDistance(archerTransform.position.x, transform.position.x)) {
-            FollowArcher();
-        } 
-        else {
-            MoveMage();
+        if (archerTransform != null) {
+            if (checkFollowDistance(archerTransform.position.x, transform.position.x)) {
+                FollowArcher();
+            } 
+            else {
+                MoveMage();
+            }
         }
     }
 
@@ -94,10 +102,14 @@ public class Mage : MonoBehaviour {
      * if the player is, the mage is set to attack the player. */
     private void FollowArcher() {
 
+        if (archerTransform == null)
+            return;
+
         if (archerTransform.position.x > transform.position.x) {
 
             if (checkAttackDistance(archerTransform.position.x, transform.position.x) && inYRange()) {
                 ChangeAnimationState(MAGE_ATTACK);
+                audioManager.Play("SwordSwing");
                 CheckAttack();
             }
             else {
@@ -115,6 +127,7 @@ public class Mage : MonoBehaviour {
 
             if (checkAttackDistance(archerTransform.position.x, transform.position.x) && inYRange()) {
                 ChangeAnimationState(MAGE_ATTACK);
+                audioManager.Play("SwordSwing");
                 CheckAttack();
             }
             else {
@@ -205,7 +218,7 @@ public class Mage : MonoBehaviour {
 
     /* This method is used to check whether or not the mage is within a certain distance on the y axis */
     private bool inYRange() {
-        if ((archerTransform.position.y - transform.position.y) < mageYAttackDistance)
+        if (Mathf.Abs(archerTransform.position.y - transform.position.y) < mageYAttackDistance)
             return true;
 
         return false;
@@ -222,7 +235,11 @@ public class Mage : MonoBehaviour {
     /* This method is used to destroy the instance of the mage. */
     private void KillMage() {
         gameUIManager.IncreaseScore(mageDeathScore);
-        Instantiate(goldCoin, transform.position, transform.rotation);
+        if (holdingKey) {
+            Instantiate(key, transform.position, transform.rotation);
+        } else {
+            Instantiate(goldCoin, transform.position, transform.rotation);
+        }
         Destroy(gameObject);
     }
 
