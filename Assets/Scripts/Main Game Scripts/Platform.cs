@@ -13,16 +13,18 @@ public class Platform : MonoBehaviour {
 
 
     private void Start() {
+        // Setting up the two points on the y axis that the platform will move between.
         topPoint = transform.position.y + 2f;
         bottomPoint = transform.position.y - 2f;
 
-        movingUp = RandomNumber() > 0.5;
+        movingUp = RandomNumber() > 0.5; // Deciding whether the platform starts off moving up or down.
     }
 
     private void Update() {
         MovePlatform();
     }
 
+    /* This method moves the platform between two points on the y axis. */
     private void MovePlatform() {
         if (movingUp) {
             transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);

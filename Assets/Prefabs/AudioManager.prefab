@@ -61,7 +61,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: GolemGrowl
     clip: {fileID: 8300000, guid: 0f0073d9c463f9f4b992249145dd6bb9, type: 3}
-    volume: 0.1
+    volume: 0.08
     loop: 1
     source: {fileID: 0}
   - name: Diamond
@@ -81,7 +81,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: BossMusic
     clip: {fileID: 8300000, guid: 91088557ce59df94fa22703bffb0cf55, type: 3}
-    volume: 0.5
+    volume: 0.4
     loop: 1
     source: {fileID: 0}
   - name: KeyPickup
@@ -103,4 +103,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 535878e7da8b97e4abaaf7ae21ba86fb, type: 3}
     volume: 0.5
     loop: 1
+    source: {fileID: 0}
+  - name: DiamondThump
+    clip: {fileID: 8300000, guid: 52ff92dbef271974786cfb44803d83f0, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyHit
+    clip: {fileID: 8300000, guid: 7bb6e5546d3e0c94d9648ac3815202ac, type: 3}
+    volume: 1
+    loop: 0
     source: {fileID: 0}

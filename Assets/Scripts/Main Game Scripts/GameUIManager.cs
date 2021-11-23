@@ -14,14 +14,15 @@ public class GameUIManager : MonoBehaviour {
 
     [Header("Text Components:")]
     [SerializeField] private TextMeshProUGUI scoreText;
-    //[SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI keyText;
     [SerializeField] private TextMeshProUGUI gameOverScoreText;
     [SerializeField] private TextMeshProUGUI goldCoinCounter;
+    [SerializeField] private TextMeshProUGUI bossHealthText;
     [Space]
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private GameObject greenArrowImage;
     [SerializeField] private GameObject redArrowImage;
+    //[SerializeField] private GameObject keyContainer;
 
     private int tempAmmo = 0;
     private int currentLevel;
@@ -35,6 +36,7 @@ public class GameUIManager : MonoBehaviour {
     private ArcherMovement archer;
     private AudioManager audioManager;
     private LevelChanger levelChanger;
+    private Boss boss;
 
     [Header("Life Sprites:")]
     [SerializeField] private Sprite threeLives;
@@ -43,30 +45,38 @@ public class GameUIManager : MonoBehaviour {
     [SerializeField] private Sprite zeroLives;
 
     private void Start() {
+        mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
+        archer = GameObject.FindObjectOfType(typeof(ArcherMovement)) as ArcherMovement;
+        audioManager = GameObject.FindObjectOfType(typeof(AudioManager)) as AudioManager;
+        levelChanger = GameObject.FindObjectOfType(typeof(LevelChanger)) as LevelChanger;
+        boss = GameObject.FindObjectOfType(typeof(Boss)) as Boss;
+
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
+        nextLevel = currentLevel + 1;
+
         scoreText.text = "Score: " + score;
-        //timeText.text = "Time: " + 0;
         goldCoinCounter.text = "0";
 
         ammoText.text = "Ammo: x7";
         greenArrowImage.SetActive(true);
         redArrowImage.SetActive(false);
 
-        keyText.text = "Key: ?";
-        keyImage.SetActive(false);
-
-        mage = GameObject.FindObjectOfType(typeof(Mage)) as Mage;
-        archer = GameObject.FindObjectOfType(typeof(ArcherMovement)) as ArcherMovement;
-        audioManager = GameObject.FindObjectOfType(typeof(AudioManager)) as AudioManager;
-        levelChanger = GameObject.FindObjectOfType(typeof(LevelChanger)) as LevelChanger;
-
-        currentLevel = SceneManager.GetActiveScene().buildIndex;
-        nextLevel = currentLevel + 1;
+        if (currentLevel != 3) {
+            keyText.text = "Key: ?";
+            keyImage.SetActive(false);
+        } else {
+            bossHealthText.text = "Golem Health: " + boss.GetHealth();
+        }
     }
 
     private void Update() {
         scoreText.text = "Score: " + score;
         goldCoinCounter.text = "" + goldCoinsCollected;
         ammoText.text = "Ammo: x" + archer.getAmmo();
+
+        if (currentLevel == 3) {
+            bossHealthText.text = "Golem Health: " + boss.GetHealth();
+        }
     }
 
     /* This method increases the players score by a given amount. */
@@ -74,7 +84,10 @@ public class GameUIManager : MonoBehaviour {
         score += amount;
     }
 
-    /* This method increments the gold coin counter by 1 every time a coin is collected */
+    /* This method increments the gold coin counter by 1 every time a coin is collected.
+     * After collecting 5 coins the player is given 5 upgraded bullets. The amount of ammo the player had before receiving the upgraded bullets is stored
+     * in a temporary variable and given back to the player after the upgraded bullets have been used.
+     */
     public void GoldCoinCounter() {
         goldCoinsCollected++;
 
@@ -95,12 +108,13 @@ public class GameUIManager : MonoBehaviour {
         }
     }
 
+    /* This method sets the key image in the game hud to active. */
     public void EquipKey() {
         keyText.text = "Key: ";
         keyImage.SetActive(true);
     }
 
-    /* This method removes a life from the player and changes the lifeImage sprite depending on how mnay lives are left. */
+    /* This method removes a life from the player and changes the lifeImage sprite depending on how many lives are left. */
     public void RemoveLife() {
         lives--;
         switch (lives) {
@@ -117,11 +131,26 @@ public class GameUIManager : MonoBehaviour {
         }
     }
 
+    /* This method increases the players lives by 1 and changes the lifeImage sprite depending on how many they have now */
+    public void IncreaseLives() {
+        lives++;
+        switch (lives) {
+            case 2:
+                lifeImage.sprite = twoLives;
+                break;
+            case 3:
+                lifeImage.sprite = threeLives;
+                break;
+        }
+    }
+
+    /* This method is called to reset the arrow image in the game hud to green when the player has used all the upgraded bullets. */
     public void resetArrowImage() {
         greenArrowImage.SetActive(true);
         redArrowImage.SetActive(false);
     }
 
+    /* This method sets the players ammo back to the amount they had before getting the upgraded bullets. */
     public void resetAmmo() {
         archer.setAmmo(tempAmmo);
     }
@@ -134,8 +163,13 @@ public class GameUIManager : MonoBehaviour {
         archer.KillArcher();
     }
 
+    /* This method is called when the player has defeated the boss and touched the diamond */
     public void WinGame() {
         //Time.timeScale = 0;
         levelChanger.FadeToLevel(nextLevel);
+    }
+
+    public int GetLives() {
+        return lives;
     }
 }

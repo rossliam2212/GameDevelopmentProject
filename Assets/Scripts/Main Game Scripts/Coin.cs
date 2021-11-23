@@ -12,6 +12,7 @@ public class Coin : MonoBehaviour {
     private void Start() {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
 
+        // If the current scene is level 1, then the coin will be set to move, otherwise it will stay still.
         if (currentScene == 1) {
             moveCoin = true;
             platform = GameObject.FindObjectOfType(typeof(Platform)) as Platform;
@@ -24,6 +25,7 @@ public class Coin : MonoBehaviour {
         }
     }
 
+    /* This method moves the coin in the same direction as the platform in level 1. */
     private void MoveCoin() {
         if (platform.isMovingUp()) {
             transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7540602480301699543}
   - component: {fileID: 4266028639484634566}
   - component: {fileID: 4480550662946816589}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Archer Upgraded Bullet
   m_TagString: ArcherUpgradedBullet
   m_Icon: {fileID: 0}

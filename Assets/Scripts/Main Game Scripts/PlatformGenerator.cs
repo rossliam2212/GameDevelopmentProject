@@ -14,8 +14,8 @@ public class PlatformGenerator : MonoBehaviour {
     [SerializeField] private float distanceBetweenPlatforms = 5f;
     [SerializeField] private bool createPlatform = true;
 
-    private int platformsGenerated = 0;
-    private const int platformsToGenerate = 30;
+    private int platformsGenerated = 0; // Counter for the number of platforms generated.
+    private const int platformsToGenerate = 30; // The number of platforms to generate.
 
     private void Start() {
     }

@@ -9204,6 +9204,7 @@ MonoBehaviour:
   keyText: {fileID: 430871616}
   gameOverScoreText: {fileID: 111727564}
   goldCoinCounter: {fileID: 680383025}
+  bossHealthText: {fileID: 0}
   ammoText: {fileID: 776113803}
   greenArrowImage: {fileID: 1143556096}
   redArrowImage: {fileID: 1384508455}

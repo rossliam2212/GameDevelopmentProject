@@ -20,6 +20,7 @@ public class ArcherMovement : MonoBehaviour {
     [SerializeField] private bool isGrounded = true;
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool isShooting = false;
+    [SerializeField] private bool isDead = false;
     [Space]
     [SerializeField] private bool hasKey = false;
     [SerializeField] private bool upgradedBullet = false;
@@ -32,13 +33,12 @@ public class ArcherMovement : MonoBehaviour {
 
     private GameUIManager gameUIManager;
     private AudioManager audioManager;
-    //private Animator mageAnimator;
-    //private Mage mage;
 
     // Animation States
     private string currentState;
     private const string ARCHER_ATTACK = "archer_attack";
     private const string ARCHER_IDLE = "archer_idle";
+    private const string ARCHER_DEATH = "archer_death";
 
 
     private void Start() {
@@ -49,23 +49,29 @@ public class ArcherMovement : MonoBehaviour {
     }
 
     private void Update() {
-        horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
+        if (!isDead) {
+            horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        if (Input.GetButtonDown("Jump")) {
-            isJumping = true;
-        }
+            if (Input.GetButtonDown("Jump")) {
+                isJumping = true;
+            }
 
-        if (Input.GetButtonDown("Fire1")) {
-            if (isShooting)
-                return;
+            if (Input.GetButtonDown("Fire1")) {
+                if (isShooting)
+                    return;
 
-            isShooting = true;
-            ChangeAnimationState(ARCHER_ATTACK); // Change to the shooting animation
-            audioManager.Play("ArrowShot");
-            Invoke("Shoot", shootingDelay); // Call the shoot method with a delay to match up with the animation
-            Invoke("ResetShoot", shootingDelay); // Call the shooting reset method
+                isShooting = true;
+                ChangeAnimationState(ARCHER_ATTACK); // Change to the shooting animation
+                audioManager.Play("ArrowShot");
+                Invoke("Shoot", shootingDelay); // Call the shoot method with a delay to match up with the animation
+                Invoke("ResetShoot", shootingDelay); // Call the shooting reset method
+            }
+
+            if (transform.position.z < 0) {
+                transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+            }
         }
     }
 
@@ -76,8 +82,6 @@ public class ArcherMovement : MonoBehaviour {
     private void Move(float move, bool jump) {
         if (move != 0 && isGrounded && GetComponent<AudioSource>().isPlaying == false) {
             GetComponent<AudioSource>().Play();
-        } else {
-            GetComponent<AudioSource>().Stop();
         }
 
         // If the Archer is facing right, move right
@@ -143,16 +147,29 @@ public class ArcherMovement : MonoBehaviour {
         animator.Play(newState);
     }
 
+    /* This method kills the player when they have no lives left. */
     public void KillArcher() {
-        Destroy(gameObject);
+        isDead = true;
+        transform.position = new Vector2(transform.position.x, transform.position.y + -0.1f);
+        ChangeAnimationState(ARCHER_DEATH);
     }
 
+    /* Archer Collision Detection. */
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "GoldCoin") {
             audioManager.Play("CoinPickup");
             gameUIManager.GoldCoinCounter();
             gameUIManager.IncreaseScore(gameUIManager.goldCoinPoints);
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Heart") {
+            if (gameUIManager.GetLives() < 3) {
+                gameUIManager.IncreaseLives();
+                Destroy(collision.gameObject);
+            } else {
+                Physics2D.IgnoreLayerCollision(6, 14); // Ignore Collision with hearts if lives are full.
+            }
         }
 
         if (collision.gameObject.tag == "Key") {
@@ -178,6 +195,7 @@ public class ArcherMovement : MonoBehaviour {
         }
     }
 
+    /* Archer Getter and Setter Methods */
     public bool getIsJumping() {
         return isJumping;
     }
@@ -200,8 +218,11 @@ public class ArcherMovement : MonoBehaviour {
     public void setAmmo(int amount) {
         ammo = amount;
     }
-
     public bool getHasKey() {
         return hasKey;
+    }
+
+    public bool GetIsDead() {
+        return isDead;
     }
 }

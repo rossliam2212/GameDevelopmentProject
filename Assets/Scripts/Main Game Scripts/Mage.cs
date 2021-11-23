@@ -26,6 +26,7 @@ public class Mage : MonoBehaviour {
     [Space]
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private bool isAttacking = false;
+    //[SerializeField] private bool isRegenerating = false;
     [SerializeField] private bool holdingKey = false;
 
     private int archerBulletDamage = 20;
@@ -47,23 +48,26 @@ public class Mage : MonoBehaviour {
     [SerializeField] private GameObject key;
     private GameUIManager gameUIManager;
     private AudioManager audioManager;
+    private ArcherMovement archer;
 
 
     private void Start() {
         animator = GetComponent<Animator>();
         gameUIManager = GameObject.FindObjectOfType(typeof(GameUIManager)) as GameUIManager;
         audioManager = GameObject.FindObjectOfType(typeof(AudioManager)) as AudioManager;
+        archer = GameObject.FindObjectOfType(typeof(ArcherMovement)) as ArcherMovement;
 
         // Setting up the two points on the x-axis that the mage moves between, if it is not following the player.
-        rightPoint = transform.position.x + 3;
-        leftPoint = transform.position.x - 3;
+        rightPoint = transform.position.x + 2;
+        leftPoint = transform.position.x - 2;
 
-        Physics2D.IgnoreLayerCollision(7, 10); // Ignoring collision with gold coins
+        Physics2D.IgnoreLayerCollision(7, 10); // Ignore collision with gold coins
+        Physics2D.IgnoreLayerCollision(7, 14); // Ignore Collision with hearts
     }
 
     private void Update() {
         if (archerTransform != null) {
-            if (checkFollowDistance(archerTransform.position.x, transform.position.x)) {
+            if (checkFollowDistance(archerTransform.position.x, transform.position.x) && !archer.GetIsDead()) {
                 FollowArcher();
             } 
             else {
@@ -95,6 +99,10 @@ public class Mage : MonoBehaviour {
             isFacingRight = true;
             spriteRenderer.flipX = false;
         }
+
+        //if (mageHealth > 100) {
+        //    isRegenerating = true;
+        //}
     }
 
     /* This method is called when the mage is within following distance of the player. */
@@ -110,7 +118,11 @@ public class Mage : MonoBehaviour {
             if (checkAttackDistance(archerTransform.position.x, transform.position.x) && inYRange()) {
                 ChangeAnimationState(MAGE_ATTACK);
                 audioManager.Play("SwordSwing");
-                CheckAttack();
+                if (archer.GetIsDead()) {
+                    MoveMage();
+                } else {
+                    CheckAttack();
+                }
             }
             else {
                 if (!inYRange()) {
@@ -128,7 +140,11 @@ public class Mage : MonoBehaviour {
             if (checkAttackDistance(archerTransform.position.x, transform.position.x) && inYRange()) {
                 ChangeAnimationState(MAGE_ATTACK);
                 audioManager.Play("SwordSwing");
-                CheckAttack();
+                if (archer.GetIsDead()) {
+                    MoveMage();
+                } else {
+                    CheckAttack();
+                }
             }
             else {
                 if (!inYRange()) {
@@ -142,6 +158,12 @@ public class Mage : MonoBehaviour {
             }
         }
     }
+
+    //private void RegenerateMage() {
+    //    ChangeAnimationState(MAGE_REGEN);
+    //    mageHealth += 5;
+    //    isRegenerating = false;
+    //}
 
     private void Attack() {
         Collider2D[] hitplayer;
@@ -232,7 +254,10 @@ public class Mage : MonoBehaviour {
         }
     }
 
-    /* This method is used to destroy the instance of the mage. */
+    /* This method is used to destroy the instance of the mage. 
+     * If the mage is set to be holding the key, an instance of the key will be spawned when the mage dies.
+     * Otherwise a coin will be spawned. 
+    */
     private void KillMage() {
         gameUIManager.IncreaseScore(mageDeathScore);
         if (holdingKey) {
@@ -243,13 +268,16 @@ public class Mage : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    /* Mage Collision Detection */
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "ArcherBullet") {
+            audioManager.Play("EnemyHit");
             TakeDamage(archerBulletDamage);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "ArcherUpgradedBullet") {
+            audioManager.Play("EnemyHit");
             TakeDamage(archerUpgradedBulletDamage);
             Destroy(collision.gameObject);
         }

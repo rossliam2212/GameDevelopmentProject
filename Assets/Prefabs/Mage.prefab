@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 6740156828506831054}
   - component: {fileID: 6740156828506831055}
   - component: {fileID: 6740156828506831091}
+  - component: {fileID: 4144111875655796720}
   - component: {fileID: 6740156828506831052}
   - component: {fileID: 6740156828506831090}
   m_Layer: 7
@@ -151,7 +152,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.061365843}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -162,8 +163,24 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.17, y: 0.29}
+  m_Size: {x: 0.17, y: 0.16726834}
   m_EdgeRadius: 0
+--- !u!58 &4144111875655796720
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6740156828506831048}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.061365835}
+  serializedVersion: 2
+  m_Radius: 0.08363413
 --- !u!50 &6740156828506831052
 Rigidbody2D:
   serializedVersion: 4
@@ -209,7 +226,7 @@ MonoBehaviour:
   runSpeed: 2.5
   isFacingRight: 1
   isAttacking: 0
-  hasKey: 0
+  holdingKey: 0
   mageAttackRange: 0.16
   archerTransform: {fileID: 3923784859222364568, guid: 958e94c7446e4274fba09a33fa6c7b2c, type: 3}
   goldCoin: {fileID: 2476572423090193876, guid: 4a1a1a8220fea854983d60850acc9cf1, type: 3}

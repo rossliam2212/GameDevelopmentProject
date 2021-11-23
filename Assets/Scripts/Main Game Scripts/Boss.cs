@@ -22,11 +22,11 @@ public class Boss : MonoBehaviour {
     [SerializeField] private int bossHealth = 100;
     [SerializeField] private float moveSpeed = .5f;
     [SerializeField] private float shootingDelay = 1f;
-    [SerializeField] private float regenerationTime = 1f;
+    //[SerializeField] private float regenerationTime = 1f;
     [Space]
     [SerializeField] private bool isMovingUp = true;
     [SerializeField] private bool isAttacking = false;
-    [SerializeField] private bool isDefence = false;
+    //[SerializeField] private bool isDefence = false;
 
     private int archerBulletDamage = 5;
     private int archerUpgradedBulletDamage = 10;
@@ -58,20 +58,18 @@ public class Boss : MonoBehaviour {
     }
 
     private void Update() {
-        if (!isDefence) {
-            MoveBoss();
+        MoveBoss();
 
-            if (isAttacking) {
-                return;
-            } else {
-                isAttacking = true;
-                Invoke("Shoot", shootingDelay);
-                Invoke("ResetShooting", shootingDelay);      
-            }
+        if (isAttacking) {
+            return;
+        } else {
+            isAttacking = true;
+            Invoke("Shoot", shootingDelay);
+            Invoke("ResetShooting", shootingDelay);      
         }
-
     }
 
+    /* This method moves the boss up and down between two points on the y axis */
     private void MoveBoss() {
         //ChangeAnimationState(BOSS_IDLE);
         ChangeAnimationState(BOSS_SHOOT);
@@ -86,48 +84,31 @@ public class Boss : MonoBehaviour {
 
         if (transform.position.y > topPoint) {
             isMovingUp = false;
-            //spriteRenderer.flipX = true;
         }
 
         if (transform.position.y < bottomPoint) {
             isMovingUp = true;
-            //spriteRenderer.flipX = false;
         }
-
-        //if (RandomNum() >= 990) {
-        //    RegenerateBoss();
-        //}
     }
 
-    private void RegenerateBoss() {
-        ChangeAnimationState(BOSS_DEFENCE);
-        isDefence = true;
-        bossHealth = 100;
-        Invoke("ResetDefence", 2f);
-    }
-
-    private void ResetDefence() {
-        isDefence = false;
-    }
-
+    /* This method creates an instance of the boss bullet. */
     private void Shoot() {
         Instantiate(bossBullet, firePoint.position, firePoint.rotation);
     }
 
+    /* This method resets the boss's attcking variable */
     private void ResetShooting() {
         isAttacking = false;
     }
 
-    private int RandomNum() {
-        return Random.Range(1, 1001);
-    }
-
+    /* This method is used to change the Boss's animation state. */
     private void ChangeAnimationState(string newState) {
         if (currentState == newState)
             return;
         animator.Play(newState);
     }
 
+    /* This method is used to take damage away from the boss. */
     private void TakeDamage(int amount) {
         bossHealth -= amount;
         if (bossHealth <= 0) {
@@ -135,6 +116,9 @@ public class Boss : MonoBehaviour {
         }
     }
 
+    /* This method is called when the Boss has no more health.
+     * An instance of the diamond is created and the boss instance is destroyed.
+     */
     private void KillBoss() {
         gameUIManager.IncreaseScore(bossDeathScore);
         audioManager.Play("Diamond");
@@ -143,6 +127,7 @@ public class Boss : MonoBehaviour {
         audioManager.Stop("GolemGrowl");
     }
 
+    /* Boss Collision Detection */
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "ArcherBullet") {
             TakeDamage(archerBulletDamage);
@@ -153,5 +138,9 @@ public class Boss : MonoBehaviour {
             TakeDamage(archerUpgradedBulletDamage);
             Destroy(collision.gameObject);
         }
+    }
+
+    public int GetHealth() {
+        return bossHealth;
     }
 }
