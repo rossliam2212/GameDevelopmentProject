@@ -64,3 +64,11 @@ Year 2 Semester 1 - Game Development Project
 - Added Additional Sound Effects & Background Music
 - Completed Final Boss Level
 - Added Game Over Win Scene
+
+## Commit 14
+- Finished Up Final Boss Level
+- Added More SOund Effects 
+- Finished Level Transitions
+- Added Heart Pickup 
+- Commented All Code
+- Cleaned Up File Structure
