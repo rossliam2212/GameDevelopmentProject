@@ -167,9 +167,7 @@ public class ArcherMovement : MonoBehaviour {
             if (gameUIManager.GetLives() < 3) {
                 gameUIManager.IncreaseLives();
                 Destroy(collision.gameObject);
-            } else {
-                Physics2D.IgnoreLayerCollision(6, 14); // Ignore Collision with hearts if lives are full.
-            }
+            } 
         }
 
         if (collision.gameObject.tag == "Key") {
